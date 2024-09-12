@@ -1,9 +1,8 @@
+def var1 = ''
+def var2 = ''
+
 pipeline {
     agent any
-    environment {
-        var1 = ''  // Definimos inicialmente en blanco, pero luego lo reasignamos en el script
-        var2 = ''
-    }
     stages {
         stage('Setup Variables') {
             steps {
@@ -15,9 +14,9 @@ pipeline {
                     if (pipelineConfig) {
                         echo "Pipeline ${env.JOB_NAME} encontrado"
                         echo "Asignando variables globales"
-                        // Reasignamos directamente a env dentro del script
-                        env.var1 = pipelineConfig.var1
-                        env.var2 = pipelineConfig.var2
+                        var1 = pipelineConfig.var1
+                        var2 = pipelineConfig.var2
+                        echo "Variables asignadas: var1=${var1}, var2=${var2}"
                     } else {
                         error "No configuration found for job ${env.JOB_NAME}"
                     }
@@ -27,15 +26,14 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Usamos las variables que están ahora en el entorno global (env)
-                    echo "Usando var1: ${env.var1} y var2: ${env.var2}"
+                    echo "Usando var1: ${var1} y var2: ${var2}"
                 }
             }
         }
     }
     post {
         always {
-            echo "En post - Usando var1: ${env.var1} y var2: ${env.var2}"
+            echo "En post - Usando var1: ${var1} y var2: ${var2}"
         }
     }
 }
