@@ -1,6 +1,7 @@
 TestRegBonoMovil-Pruebas:
   var1: 'staging'
   var2: 'build_1'
+  secVarId: 'token'
 pipeline2:
   var1: 'staging'
   var2: 'build_2'

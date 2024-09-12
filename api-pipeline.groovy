@@ -1,5 +1,7 @@
+def configFile = 'api-pipeline-variables.yml'
 def var1 = ''
 def var2 = ''
+def secVarId = ''
 
 pipeline {
     agent any
@@ -8,14 +10,13 @@ pipeline {
             steps {
                 script {
                     // Leer el archivo YAML
-                    def config = readYaml file: 'api-pipeline-variables.yml'
+                    def config = readYaml file: configFile
                     def pipelineConfig = config[env.JOB_NAME]
                     
                     if (pipelineConfig) {
-                        echo "Pipeline ${env.JOB_NAME} encontrado"
-                        echo "Asignando variables globales"
                         var1 = pipelineConfig.var1
                         var2 = pipelineConfig.var2
+                        secVarId = credentials(pipelineConfig.secVarId)
                         echo "Variables asignadas: var1=${var1}, var2=${var2}"
                     } else {
                         error "No configuration found for job ${env.JOB_NAME}"
