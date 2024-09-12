@@ -25,8 +25,10 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo "Usando var1: ${env.var1} y var2: ${env.var2}"
-                // Lógica de construcción aquí
+                script {
+                    echo "Usando var1: ${env.var1} y var2: ${env.var2}"
+                    // Lógica de construcción aquí
+                }
             }
         }
     }
