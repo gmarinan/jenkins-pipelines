@@ -14,9 +14,9 @@ pipeline {
                     
                     if (pipelineConfig) {
                         echo "Pipeline ${env.JOB_NAME} encontrado"
-                        echo "Asignando variable ${pipelineConfig.var1}"
-                        var1 = pipelineConfig.var1
-                        var2 = pipelineConfig.var2
+                        echo "Asignando variables globales"
+                        env.var1 = pipelineConfig.var1
+                        env.var2 = pipelineConfig.var2
                     } else {
                         error "No configuration found for job ${env.JOB_NAME}"
                     }
@@ -25,11 +25,15 @@ pipeline {
         }
         stage('Build') {
             steps {
-                script {
-                    echo "Usando var1: ${var1} y var2: ${var2}"
-                    // Lógica de construcción aquí
-                }
+                echo "Usando var1: ${env.var1} y var2: ${env.var2}"
+                // Lógica de construcción aquí
             }
+        }
+    }
+    post {
+        always {
+            echo "En post - Usando var1: ${env.var1} y var2: ${env.var2}"
+            // Aquí puedes usar las variables env.var1 y env.var2
         }
     }
 }
