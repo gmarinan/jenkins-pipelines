@@ -13,6 +13,8 @@ pipeline {
                     def pipelineConfig = config[env.JOB_NAME]
                     
                     if (pipelineConfig) {
+                        echo "Pipeline ${env.JOB_NAME} encontrado"
+                        echo "Asignando variable ${pipelineConfig.var1}"
                         env.var1 = pipelineConfig.var1
                         env.var2 = pipelineConfig.var2
                     } else {
