@@ -27,7 +27,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo "Usando var1: ${var1} y var2: ${var2}"
+                    echo "Usando var1: ${var1} y var2: ${var2} y credencial: ${secVarId}"
                 }
             }
         }
