@@ -1,0 +1,6 @@
+TestRegBonoMovil-Pruebas:
+  var1: 'staging'
+  var2: 'build_1'
+pipeline2:
+  var1: 'staging'
+  var2: 'build_2'
